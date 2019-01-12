@@ -1,0 +1,52 @@
+server.port: 8080
+server:
+  ssl:
+    key-store: classpath:serverKeyStore.p12
+    key-store-password: ${CODE10_SIEM_CERT_SERVER_KEY_PASS}
+    key-password: ${CODE10_SIEM_CERT_SERVER_KEY_PASS}
+    trust-store: classpath:serverTrustStore.p12
+    trust-store-password: ${CODE10_SIEM_CERT_SERVER_KEY_PASS}
+    client-auth: want # Not supported in Angular so we can't use 'need'
+    trust-store-type: PKCS12
+    key-store-type: PKCS12
+    protocol: TLSv1.2
+  compression:
+    enabled: false # CRIME attack prevention
+
+spring.boot.admin.client.url: "http://localhost:8081"
+management.endpoints.web.exposure.include: "*"
+
+db:
+  name: siemdb
+  host: localhost
+  port: 27017
+  username: ${CODE10_SIEM_DB_DEV_USERNAME}
+  password: ${CODE10_SIEM_DB_DEV_PASSWORD}
+
+token:
+  header: X-Auth-Token
+  secret: ${CODE10_SIEM_TOKEN_SECRET}
+  expiration: 604800
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/siemdb?useSSL=false&createDatabaseIfNotExist=true
+    driverClassName: com.mysql.jdbc.Driver
+    username: root
+    password: root
+#  h2.console:
+#      enabled: true
+#      path: /h2-console
+#      settings.web-allow-others: true
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    database: mysql
+    show_sql: true
+    hibernate:
+      ddl-auto: update
+
+rules:
+  groupId: com.code10.security
+  artifactId: siem-rules
+  version: 0.0.1-SNAPSHOT
+  sessionName: siemKieSession

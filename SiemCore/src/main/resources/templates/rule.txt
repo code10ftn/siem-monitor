@@ -1,0 +1,38 @@
+import com.code10.security.model.LogEvent;
+import com.code10.security.service.RuleService;
+import java.util.List;
+
+rule "[(${ruleName})]"
+    lock-on-active true
+    when
+        $service: RuleService()
+
+        $baseEvent: LogEvent( $baseLog: logItem,
+            $baseLog.ipAddress matches "[(${logIpAddress})]",
+            $baseLog.hostName matches "[(${logHostName})]",
+            $baseLog.sourceName matches "[(${logSourceName})]",
+            $baseLog.processId matches "[(${logProcessId})]",
+            $baseLog.facility matches "[(${logFacility})]",
+            $baseLog.severity.name matches "[(${logSeverity})]",
+            $baseLog.system matches "[(${logSystem})]",
+            $baseLog.message matches "[(${logMessage})]",
+            $baseLog.raw matches "[(${logRaw})]"
+        )
+
+        $logs: List(size >= [(${repetitions})]) from accumulate(
+            $e: LogEvent( $i: logItem,
+                $i.ipAddress matches "[(${logIpAddress})]"[(${logIpAddressRepeated})],
+                $i.hostName matches "[(${logHostName})]"[(${logHostNameRepeated})],
+                $i.sourceName matches "[(${logSourceName})]"[(${logSourceNameRepeated})],
+                $i.processId matches "[(${logProcessId})]"[(${logProcessIdRepeated})],
+                $i.facility matches "[(${logFacility})]"[(${logFacilityRepeated})],
+                $i.severity.name matches "[(${logSeverity})]"[(${logSeverityRepeated})],
+                $i.system matches "[(${logSystem})]",
+                $i.message matches "[(${logMessage})]"[(${logMessageRepeated})],
+                $i.raw matches "[(${logRaw})]"[(${logRawRepeated})]
+            )
+            over window:time([(${interval})]m), collectList($e)
+        )
+    then
+        $service.fireAlarm([(${ruleId})], $logs);
+end

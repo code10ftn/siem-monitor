@@ -1,0 +1,57 @@
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/bootstrap.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+
+body {
+    padding-top: 56px;
+}
+
+.toast-position {
+    top: 68px;
+    right: 12px;
+}
+
+.form {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-medium {
+    max-width: 700px !important;
+}
+
+.form .form-heading {
+    margin-bottom: 20px;
+}
+
+.form .form-control {
+    position: relative;
+    box-sizing: border-box;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.form-control:focus {
+    z-index: 2;
+}
+
+form label {
+    margin-top: 8px;
+    margin-bottom: 2px;
+}
+
+.rules-list {
+    max-width: 900px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.scroller {
+    height: 94vh;
+    overflow-y: scroll;
+}

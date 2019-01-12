@@ -1,0 +1,98 @@
+<form class="form form-medium" (ngSubmit)="saveRule()" #ruleForm="ngForm">
+  <br/>
+  <br/>
+  <h2 class="form-heading">Rule</h2>
+
+  <div class="col">
+    <h5> Basic info</h5>
+    <div>
+      <label>Rule name</label>
+      <input type="text" [attr.disabled]="rule.id ? '' : null" class="form-control" [(ngModel)]="rule.name" name="name" required
+        autofocus>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label>Interval (in minutes)</label>
+        <input type="number" class="form-control" [(ngModel)]="rule.interval" name="interval" min="1" oninput="validity.valid||(value='');"
+          required>
+      </div>
+      <div class="col-md-6">
+        <label>Repetitions</label>
+        <input type="number" class="form-control" [(ngModel)]="rule.repetitions" name="repetitions" min="1" oninput="validity.valid||(value='');"
+          required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div>
+          <label>Priority</label>
+        </div>
+        <div class="btn-group">
+          <label class="btn btn-primary" [(ngModel)]="rule.priority" btnRadio="LOW" name="priority" tabindex="0" role="button">Low</label>
+          <label class="btn btn-primary" [(ngModel)]="rule.priority" btnRadio="MEDIUM" name="priority" tabindex="0" role="button">Medium</label>
+          <label class="btn btn-primary" [(ngModel)]="rule.priority" btnRadio="HIGH" name="priority" tabindex="0" role="button">High</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div>
+          <label>System</label>
+        </div>
+        <div class="btn-group">
+          <label class="btn btn-primary" [(ngModel)]="rule.logSystem" uncheckable btnRadio="Windows" name="system" tabindex="0" role="button">Windows</label>
+          <label class="btn btn-primary" [(ngModel)]="rule.logSystem" uncheckable btnRadio="Linux" name="system" tabindex="0" role="button">Linux</label>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <h5>Regex matchers</h5>
+    <div class="row">
+      <div class="col-md-6">
+        <label>IP address</label>
+        <input type="text" class="form-control" [(ngModel)]="rule.logIpAddress" name="ipAddress">
+        <label>
+          <input type="checkbox" name="ipAddressCB" [(ngModel)]="rule.logIpAddressRepeated"> Repeated</label>
+        <br/>
+        <label>Host name</label>
+        <input type="text" class="form-control" [(ngModel)]="rule.logHostName" name="hostName">
+        <label>
+          <input type="checkbox" name="hostNameCB" [(ngModel)]="rule.logHostNameRepeated"> Repeated</label>
+        <br/>
+        <label>Source name</label>
+        <input type="text" class="form-control" [(ngModel)]="rule.logSourceName" name="sourceName">
+        <label>
+          <input type="checkbox" name="sourceNameCB" [(ngModel)]="rule.logSourceNameRepeated"> Repeated</label>
+        <br/>
+        <label>Process ID</label>
+        <input type="text" class="form-control" [(ngModel)]="rule.logProcessId" name="processId">
+        <label>
+          <input type="checkbox" name="processIdCB" [(ngModel)]="rule.logProcessIdRepeated"> Repeated</label>
+        <br/>
+      </div>
+
+      <div class="col-md-6">
+        <label>Facility</label>
+        <input type="text" class="form-control" [(ngModel)]="rule.logFacility" name="facility">
+        <label>
+          <input type="checkbox" name="facilityCB" [(ngModel)]="rule.logFacilityRepeated"> Repeated</label>
+        <br/>
+        <label>Severity</label>
+        <input type="text" class="form-control" [(ngModel)]="rule.logSeverity" name="severity">
+        <label>
+          <input type="checkbox" name="severityCB" [(ngModel)]="rule.logSeverityRepeated"> Repeated</label>
+        <br/>
+        <label>Message</label>
+        <input type="text" class="form-control" [(ngModel)]="rule.logMessage" name="message">
+        <label>
+          <input type="checkbox" name="messageCB" [(ngModel)]="rule.logMessageRepeated"> Repeated</label>
+        <br/>
+        <label>Raw</label>
+        <input type="text" class="form-control" [(ngModel)]="rule.logRaw" name="raw">
+        <label>
+          <input type="checkbox" name="rawCB" [(ngModel)]="rule.logRawRepeated"> Repeated</label>
+        <br/>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <button id="createRuleButton" [disabled]="ruleForm.form.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Save rule</button>
+</form>

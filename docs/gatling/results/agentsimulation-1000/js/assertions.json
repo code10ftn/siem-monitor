@@ -1,0 +1,10 @@
+{
+  "simulation": "siem.AgentSimulation",
+  "simulationId": "agentsimulation",
+  "start": 1530196770362,
+  "description": "",
+  "scenarios": ["TestSimulation"],
+  "assertions": [
+
+  ]
+}

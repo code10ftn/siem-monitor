@@ -1,0 +1,16 @@
+api-url: https://localhost:8080/api/logs
+
+read-os-logs: True
+os-logs-regex: .*
+os-logs-interval: 0
+
+logs:
+#  - path: C:\Workspace\BSEP\siem-monitor\SiemAgent\test1.log
+#    regex: .*
+#    interval: 0 # Real time
+#  - path: C:\Workspace\BSEP\siem-monitor\SiemAgent\test2.log
+#    regex: .*
+#    interval: 5 # Polling interval in seconds
+ - path: C:\Workspace\BSEP\siem-monitor\SiemAgent\generated.log
+   regex: .*
+   interval: 5

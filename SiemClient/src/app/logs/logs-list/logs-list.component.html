@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-md-2 scroller">
+    <form class="form" (ngSubmit)="search()" #searchForm="ngForm">
+      <label>Timestamp start</label>
+      <input type="datetime-local" class="form-control" [(ngModel)]="logQuery.timestampStart" name="timestampStart">
+      <label>Timestamp end</label>
+      <input type="datetime-local" class="form-control" [(ngModel)]="logQuery.timestampEnd" name="timestampEnd">
+      <label>IP address (regex)</label>
+      <input type="text" class="form-control" [(ngModel)]="logQuery.ipAddress" name="ipAddress">
+      <label>Host name (regex)</label>
+      <input type="text" class="form-control" [(ngModel)]="logQuery.hostName" name="hostName">
+      <label>Source name (regex)</label>
+      <input type="text" class="form-control" [(ngModel)]="logQuery.sourceName" name="sourceName">
+      <label>Process ID</label>
+      <input type="text" class="form-control" [(ngModel)]="logQuery.processId" name="processId">
+      <label>Facility (regex)</label>
+      <input type="text" class="form-control" [(ngModel)]="logQuery.facility" name="facility">
+      <label>Severity</label>
+      <select class="form-control" [(ngModel)]="logQuery.severity" name="severity">
+        <option [ngValue]="null"></option>
+        <option>DEBUG</option>
+        <option>INFO</option>
+        <option>NOTICE</option>
+        <option>WARNING</option>
+        <option>ERROR</option>
+        <option>CRITICAL</option>
+        <option>ALERT</option>
+        <option>EMERGENCY</option>
+        <option>UNKNOWN</option>
+      </select>
+      <label>System</label>
+      <select class="form-control" [(ngModel)]="logQuery.system" name="system">
+        <option [ngValue]="null"></option>
+        <option>Windows</option>
+        <option>Linux</option>
+      </select>
+      <label>Message</label>
+      <input type="text" class="form-control" [(ngModel)]="logQuery.message" name="message">
+      <label>Raw (regex)</label>
+      <input type="text" class="form-control" [(ngModel)]="logQuery.regex" name="regex">
+      <label></label>
+      <button id="searchButton" [disabled]="searchForm.form.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+      <button id="resetButton" class="btn btn-lg btn-secondary btn-block" (click)="reset()">Reset</button>
+    </form>
+  </div>
+  <div class="col-md scroller">
+    <ngx-datatable class="bootstrap" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+      [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber" [limit]="page.size" (page)='setPage($event)'>
+      <ngx-datatable-column name="Timestamp">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value | date: 'MMM d, y, HH:mm'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="ipAddress">
+        <ng-template let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()" class="pointer">IP address</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="hostName">
+        <ng-template let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()" class="pointer">Host name</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="sourceName">
+        <ng-template let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()" class="pointer">Source name</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="processId">
+        <ng-template let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()" class="pointer">Process ID</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Facility"></ngx-datatable-column>
+      <ngx-datatable-column name="Severity"></ngx-datatable-column>
+      <ngx-datatable-column name="System"></ngx-datatable-column>
+      <ngx-datatable-column name="Message" [width]="500"></ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

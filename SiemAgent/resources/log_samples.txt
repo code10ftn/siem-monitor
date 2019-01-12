@@ -1,0 +1,17 @@
+DEBUG:Successfully scanned QR code in {}ms.
+DEBUG:Failed to scan QR code.
+INFO:code10 Pay application API version 0.0.1 started.
+INFO:code10 Pay application API version 0.0.1 shutdown.
+INFO:User (user_id={}) successfully signed up.
+INFO:User (user_id={}) successfully signed in.
+INFO:User (user_id={}) failed to sign in due to wrong credentials.
+INFO:User (user_id={}) registered new card (card_id={}).
+INFO:User (user_id={}) deleted card (card_id={}).
+INFO:User (user_id={}) successfully committed transaction (transaction_id={}).
+INFO:User (user_id={}) failed to commit transaction.
+WARNING:User (user_id={}) password reset due to 3 failed sign in attempts.
+WARNING:User (user_id={}) temporarily blocked due to too frequent requests.
+ERROR:Payment service (3rd party) failed to respond to transaction request (user_id={}, card_id={}).
+ERROR:Payment service (3rd party) failed to respond to card registration (user_id={}).
+ERROR:Payment service (3rd party) failed to respond to card deletion (user_id={}, card_id={}).
+CRITICAL:Internal server error - {}

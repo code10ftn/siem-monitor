@@ -1,0 +1,11 @@
+<form class="form" (ngSubmit)="downloadReport()" #reportForm="ngForm">
+  <br/>
+  <br/>
+  <h2 class="form-heading">Generate report</h2>
+  <label>Start date</label>
+  <input type="datetime-local" class="form-control" [(ngModel)]="reportRequest.startDate" name="startDate" required>
+  <label>End date</label>
+  <input type="datetime-local" class="form-control" [(ngModel)]="reportRequest.endDate" name="endDate" required>
+  <br/>
+  <button id="searchButton" [disabled]="reportForm.form.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Download report</button>
+</form>

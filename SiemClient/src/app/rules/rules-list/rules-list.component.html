@@ -1,0 +1,22 @@
+<div class="rules-list">
+  <ngx-datatable class="bootstrap" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+    [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber" [limit]="page.size" (page)='setPage($event)'>
+    <ngx-datatable-column name="Name" [width]="700">
+      <ng-template let-sort="sortFn" ngx-datatable-header-template>
+        <span (click)="sort()" class="pointer">Rule name</span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column>
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <i class="fa fa-edit fa-2x icon-pad pointer" title="Click to update rule" aria-hidden="true" (click)="showRuleDetails(row)"></i>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column>
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <i class="fa fa-trash fa-2x icon-pad pointer" title="Delete" aria-hidden="true" (click)="openConfirmDialog(row)"></i>
+      </ng-template>
+    </ngx-datatable-column>
+
+  </ngx-datatable>
+</div>

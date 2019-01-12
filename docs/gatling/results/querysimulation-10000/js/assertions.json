@@ -1,0 +1,10 @@
+{
+  "simulation": "siem.QuerySimulation",
+  "simulationId": "querysimulation",
+  "start": 1530196669749,
+  "description": "",
+  "scenarios": ["TestSimulation"],
+  "assertions": [
+
+  ]
+}

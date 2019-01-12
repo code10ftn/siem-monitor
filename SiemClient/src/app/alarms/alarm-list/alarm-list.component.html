@@ -1,0 +1,109 @@
+<div class="row">
+  <div class="col-md-3 scroller">
+    <ngx-datatable class="bootstrap" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+      [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber" [limit]="page.size" (page)='setPage($event)'
+      [selected]="selected" [selectionType]="'single'">
+      <ngx-datatable-column name="Timestamp">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value | date: 'MMM d, y, HH:mm'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Rule name" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.rule.name}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Priority" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.rule.priority}}
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+  <div class="col-md scroller" *ngIf="selected.length > 0">
+    <h4>{{selected[0].rule.name}} [{{selected[0].rule.interval}}m interval, {{selected[0].rule.repetitions}}+ repetitions, {{selected[0].rule.priority}}
+      priority] - Matchers:
+    </h4>
+    <ngx-datatable class="bootstrap" [rows]="[selected[0].rule]" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="0"
+      [rowHeight]="'auto'">
+      <ngx-datatable-column name="IP address" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.logIpAddress}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Host name" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.logHostName}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Source name" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.logSourceName}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Process ID" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.logProcessId}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Facility" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.logFacility}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Severity" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.logSeverity}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="System" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.logSystem}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Message" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.logMessage}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Raw" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.logRaw}}
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+    <h4>Matching logs:</h4>
+    <ngx-datatable class="bootstrap" [rows]="selected[0].logs" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+      [rowHeight]="'auto'">
+      <ngx-datatable-column name="Timestamp">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value | date: 'MMM d, y, HH:mm'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="ipAddress">
+        <ng-template let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()" class="pointer">IP address</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="hostName">
+        <ng-template let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()" class="pointer">Host name</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="sourceName" [width]="200">
+        <ng-template let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()" class="pointer">Source name</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="processId">
+        <ng-template let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()" class="pointer">Process ID</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Facility"></ngx-datatable-column>
+      <ngx-datatable-column name="Severity"></ngx-datatable-column>
+      <ngx-datatable-column name="System"></ngx-datatable-column>
+      <ngx-datatable-column name="Message" [width]="400"></ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>
